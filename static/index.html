@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Success XAI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Student <span class="accent">Success</span> Predictor</h1>
+            <p>Empowering educators with Explainable AI insights for personalized interventions.</p>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- INPUT PANEL -->
+            <section class="card glass input-panel">
+                <div class="card-header">
+                    <h2>Student Profile</h2>
+                    <span class="badge">32 Factors Tracking</span>
+                </div>
+                <form id="prediction-form">
+                    <div class="form-groups">
+                        <div class="form-section">
+                            <h3>Academic History</h3>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="G1">G1 Grade (0-20)</label>
+                                    <input type="number" id="G1" name="G1" value="12" min="0" max="20">
+                                </div>
+                                <div class="input-group">
+                                    <label for="G2">G2 Grade (0-20)</label>
+                                    <input type="number" id="G2" name="G2" value="12" min="0" max="20">
+                                </div>
+                                <div class="input-group">
+                                    <label for="failures">Past Failures</label>
+                                    <input type="number" id="failures" name="failures" value="0" min="0" max="4">
+                                </div>
+                                <div class="input-group">
+                                    <label for="absences">Absences</label>
+                                    <input type="number" id="absences" name="absences" value="2" min="0" max="93">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Behavioral Factors</h3>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="studytime">Study Time (1-4)</label>
+                                    <select id="studytime" name="studytime">
+                                        <option value="1">< 2 hours</option>
+                                        <option value="2" selected>2 to 5 hours</option>
+                                        <option value="3">5 to 10 hours</option>
+                                        <option value="4">> 10 hours</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="goout">Socializing (1-5)</label>
+                                    <input type="range" id="goout" name="goout" min="1" max="5" value="3">
+                                </div>
+                                <div class="input-group">
+                                    <label for="freetime">Free Time (1-5)</label>
+                                    <input type="range" id="freetime" name="freetime" min="1" max="5" value="3">
+                                </div>
+                                <div class="input-group">
+                                    <label for="Walc">Weekend Alcohol (1-5)</label>
+                                    <input type="range" id="Walc" name="Walc" min="1" max="5" value="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Background</h3>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="Medu">Mother's Education (0-4)</label>
+                                    <input type="number" id="Medu" name="Medu" value="4" min="0" max="4">
+                                </div>
+                                <div class="input-group">
+                                    <label for="guardian">Guardian</label>
+                                    <select id="guardian" name="guardian">
+                                        <option value="mother" selected>Mother</option>
+                                        <option value="father">Father</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="internet">Internet Access</label>
+                                    <select id="internet" name="internet">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="romantic">In Relationship</label>
+                                    <select id="romantic" name="romantic">
+                                        <option value="no" selected>No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Other fields will be handled with default values to keep the UI clean -->
+                    <button type="submit" id="predict-btn">Generate Prediction & Insights</button>
+                    <p class="helper-text">* Remaining attributes are set to baseline averages for this demonstration.</p>
+                </form>
+            </section>
+
+            <!-- RESULTS PANEL -->
+            <section class="results-panel">
+                <!-- SCORE CARD -->
+                <div class="card glass score-card" id="score-container">
+                    <div class="placeholder-content">
+                        <h3>Prediction Results</h3>
+                        <p>Configure student profile and click predict to see AI insights.</p>
+                    </div>
+                    <div class="actual-content hidden" id="prediction-result">
+                        <div class="score-main">
+                            <div class="label">Predicted G3 Grade</div>
+                            <div class="value" id="res-score">--</div>
+                        </div>
+                        <div class="status-indicator" id="res-status">--</div>
+                    </div>
+                </div>
+
+                <!-- XAI SHAP PANEL -->
+                <div class="card glass xai-card">
+                    <div class="card-header">
+                        <h2>XAI Influence Analysis</h2>
+                        <span class="ai-badge">SHAP KernelExplainer</span>
+                    </div>
+                    <div id="shap-container" class="plot-container">
+                        <div class="placeholder-plot">
+                            <div class="spinner hidden"></div>
+                            <p>Calculating feature importance...</p>
+                        </div>
+                        <iframe id="shap-frame" class="hidden"></iframe>
+                    </div>
+                </div>
+
+                <!-- ADVICE PANEL -->
+                <div class="card glass advice-card">
+                    <div class="card-header">
+                        <h2>Top Improvement Areas</h2>
+                    </div>
+                    <div id="advice-list" class="advice-content">
+                        <p class="placeholder-text">Advice will appear here after analysis.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 Student Performance XAI - Deep Learning & Explainability Research</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

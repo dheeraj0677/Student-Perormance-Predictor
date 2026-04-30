@@ -1,5 +1,9 @@
 # 🎓 Student Success Predictor (XAI Dashboard)
 
+<p align="center">
+  <img src="static/screenshots/dashboard_mockup.png" alt="Dashboard Preview" width="100%">
+</p>
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
@@ -11,11 +15,27 @@ A state-of-the-art **Student Performance Prediction System** combined with **Exp
 
 ## 🌟 Key Features
 
-- **🎯 Predictive Modeling**: Uses a Deep Learning Neural Network (TensorFlow) to predict final student grades based on 32 diverse factors.
-- **🔍 Explainable AI (XAI)**: Integrated **SHAP KernelExplainer** provides interactive force plots showing exactly which factors (e.g., absences, study time, alcohol consumption) pushed the prediction up or down.
-- **💡 Personalized Advice**: An intelligent advice engine identifies the top 3 negative contributors to a student's performance and generates actionable feedback.
-- **🛡️ Robust Fallbacks**: Automatically switches to a Scikit-Learn `MLPRegressor` if TensorFlow is unavailable in the environment.
-- **🎨 Glassmorphism Dashboard**: A modern, responsive UI built with vanilla CSS, featuring real-time interactive plots and glassmorphism aesthetics.
+- **🎯 Deep Learning Engine**: Uses a multi-layer Neural Network (TensorFlow) to predict student outcomes based on 32 complex behavioral and academic factors.
+- **🔍 Explainable AI (SHAP)**: Integrated **SHAP KernelExplainer** provides interactive force plots that decompose predictions, showing exactly which factors (e.g., absences, study time) pushed the grade up or down.
+- **💡 Intelligent Advice System**: A built-in reasoning engine that translates negative SHAP values into actionable, human-readable feedback for student improvement.
+- **🛡️ Adaptive Fallback**: Automatically detects system capabilities and switches to a Scikit-Learn `MLPRegressor` if TensorFlow is unavailable.
+- **🎨 Glassmorphism Dashboard**: A modern, responsive UI built with vanilla CSS, featuring real-time interactive plots and premium "frosted glass" aesthetics.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    A[User Input] --> B[FastAPI Backend]
+    B --> C{Model Selection}
+    C -->|Success| D[TensorFlow DNN]
+    C -->|Fallback| E[SKLearn MLP]
+    D --> F[SHAP Analysis]
+    E --> F
+    F --> G[Advice Engine]
+    G --> H[Interactive Dashboard]
+```
 
 ---
 
@@ -25,7 +45,7 @@ A state-of-the-art **Student Performance Prediction System** combined with **Exp
 - **Machine Learning**: TensorFlow / Scikit-Learn
 - **Explainability**: SHAP (SHapley Additive exPlanations)
 - **Data Handling**: Pandas, NumPy
-- **Frontend**: HTML5, Vanilla CSS, JavaScript (Fetch API)
+- **Frontend**: HTML5, Vanilla CSS (Glassmorphism), JavaScript (Fetch API)
 
 ---
 
@@ -34,7 +54,7 @@ A state-of-the-art **Student Performance Prediction System** combined with **Exp
 ### Prerequisites
 
 - Python 3.9 or higher
-- `pip` or `conda`
+- Git
 
 ### Installation
 
@@ -52,7 +72,7 @@ A state-of-the-art **Student Performance Prediction System** combined with **Exp
 
 3. **Install dependencies**:
    ```bash
-   pip install fastapi uvicorn tensorflow scikit-learn shap pandas numpy
+   pip install -r requirements.txt
    ```
 
 ### Running the Application
@@ -61,30 +81,20 @@ A state-of-the-art **Student Performance Prediction System** combined with **Exp
    ```bash
    python app.py
    ```
-   *The server will automatically train the model on the `student-mat.csv` dataset upon startup.*
+   *The system will automatically train the model on the `student-mat.csv` dataset upon the first startup.*
 
 2. **Access the Dashboard**:
-   Open your browser and navigate to:
-   `http://127.0.0.1:8000`
+   Navigate to `http://127.0.0.1:8000` in your browser.
 
 ---
 
-## 📊 Data Source
+## 📊 Dataset Overview
 
-The project utilizes the **Student Performance Data Set** from the UCI Machine Learning Repository. It covers student achievement in secondary education of two Portuguese schools, focusing on:
-- Social, demographic, and school-related features.
-- Grades (G1, G2, G3).
-- Behavioral metrics (alcohol consumption, absences, free time).
-
----
-
-## 📸 Screenshots
-
-*(Add your screenshots here to make the README pop!)*
-
-<p align="center">
-  <img src="static/screenshots/dashboard_mockup.png" alt="Dashboard Preview" width="800">
-</p>
+The project utilizes the **Student Performance Data Set** from the UCI Machine Learning Repository. It tracks student achievement in secondary education across two Portuguese schools, covering:
+- **Demographics**: Address, family size, parents' status.
+- **Academic**: Past failures, school support, study time.
+- **Social**: Alcohol consumption (Dalc/Walc), social outings, family relationships.
+- **Target**: G3 (Final Grade, 0-20 scale).
 
 ---
 
@@ -94,4 +104,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Developed with ❤️ for Academic Excellence.**
+**Developed with ❤️ by [Your Name] for Academic Excellence.**
+

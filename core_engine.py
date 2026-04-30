@@ -49,7 +49,8 @@ class StudentSuccessEngine:
                 optimizer = tf.keras.optimizers.Lion(learning_rate=0.0001)
             except AttributeError:
                 optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
-                
+            
+            #neural networks concept    
             self.model = models.Sequential([
                 layers.Input(shape=(input_dim,)),
                 layers.Dense(64, activation='relu'),

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Success XAI Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,8 +25,102 @@
                 </div>
                 <form id="prediction-form">
                     <div class="form-groups">
+                        <!-- 1. Personal & Demographic -->
                         <div class="form-section">
-                            <h3>Academic History</h3>
+                            <h3>Personal & Demographic</h3>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="school">School</label>
+                                    <select id="school" name="school">
+                                        <option value="GP" selected>Gabriel Pereira</option>
+                                        <option value="MS">Mousinho da Silveira</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="sex">Sex</label>
+                                    <select id="sex" name="sex">
+                                        <option value="F" selected>Female</option>
+                                        <option value="M">Male</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" name="age" value="18" min="15" max="22">
+                                </div>
+                                <div class="input-group">
+                                    <label for="address">Address</label>
+                                    <select id="address" name="address">
+                                        <option value="U" selected>Urban</option>
+                                        <option value="R">Rural</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="famsize">Family Size</label>
+                                    <select id="famsize" name="famsize">
+                                        <option value="LE3">&lt;= 3</option>
+                                        <option value="GT3" selected>&gt; 3</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="Pstatus">Parent Cohabitation</label>
+                                    <select id="Pstatus" name="Pstatus">
+                                        <option value="T" selected>Together</option>
+                                        <option value="A">Apart</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Family Background -->
+                        <div class="form-section">
+                            <h3>Family Background</h3>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="Medu">Mother's Education (0-4)</label>
+                                    <input type="number" id="Medu" name="Medu" value="4" min="0" max="4">
+                                </div>
+                                <div class="input-group">
+                                    <label for="Fedu">Father's Education (0-4)</label>
+                                    <input type="number" id="Fedu" name="Fedu" value="4" min="0" max="4">
+                                </div>
+                                <div class="input-group">
+                                    <label for="Mjob">Mother's Job</label>
+                                    <select id="Mjob" name="Mjob">
+                                        <option value="teacher">Teacher</option>
+                                        <option value="health">Health</option>
+                                        <option value="services">Services</option>
+                                        <option value="at_home" selected>At Home</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="Fjob">Father's Job</label>
+                                    <select id="Fjob" name="Fjob">
+                                        <option value="teacher" selected>Teacher</option>
+                                        <option value="health">Health</option>
+                                        <option value="services">Services</option>
+                                        <option value="at_home">At Home</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="guardian">Guardian</label>
+                                    <select id="guardian" name="guardian">
+                                        <option value="mother" selected>Mother</option>
+                                        <option value="father">Father</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="famrel">Family Quality (1-5)</label>
+                                    <input type="range" id="famrel" name="famrel" min="1" max="5" value="4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Academic & School -->
+                        <div class="form-section">
+                            <h3>Academic & School</h3>
                             <div class="input-grid">
                                 <div class="input-group">
                                     <label for="G1">G1 Grade (0-20)</label>
@@ -37,26 +131,87 @@
                                     <input type="number" id="G2" name="G2" value="12" min="0" max="20">
                                 </div>
                                 <div class="input-group">
-                                    <label for="failures">Past Failures</label>
+                                    <label for="failures">Past Failures (0-4)</label>
                                     <input type="number" id="failures" name="failures" value="0" min="0" max="4">
                                 </div>
                                 <div class="input-group">
                                     <label for="absences">Absences</label>
                                     <input type="number" id="absences" name="absences" value="2" min="0" max="93">
                                 </div>
+                                <div class="input-group">
+                                    <label for="reason">Reason for School</label>
+                                    <select id="reason" name="reason">
+                                        <option value="home">Close to home</option>
+                                        <option value="reputation">Reputation</option>
+                                        <option value="course" selected>Course preference</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="traveltime">Travel Time (1-4)</label>
+                                    <select id="traveltime" name="traveltime">
+                                        <option value="1">&lt; 15 min</option>
+                                        <option value="2" selected>15 to 30 min</option>
+                                        <option value="3">30 min to 1 hour</option>
+                                        <option value="4">&gt; 1 hour</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="schoolsup">Extra Edu Support</label>
+                                    <select id="schoolsup" name="schoolsup">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="famsup">Family Edu Support</label>
+                                    <select id="famsup" name="famsup">
+                                        <option value="yes">Yes</option>
+                                        <option value="no" selected>No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="paid">Extra Paid Classes</label>
+                                    <select id="paid" name="paid">
+                                        <option value="yes">Yes</option>
+                                        <option value="no" selected>No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="activities">Extra-curricular</label>
+                                    <select id="activities" name="activities">
+                                        <option value="yes">Yes</option>
+                                        <option value="no" selected>No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="nursery">Attended Nursery</label>
+                                    <select id="nursery" name="nursery">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="higher">Wants Higher Edu</label>
+                                    <select id="higher" name="higher">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- 4. Behavioral & Lifestyle -->
                         <div class="form-section">
-                            <h3>Behavioral Factors</h3>
+                            <h3>Behavioral & Lifestyle</h3>
                             <div class="input-grid">
                                 <div class="input-group">
                                     <label for="studytime">Study Time (1-4)</label>
                                     <select id="studytime" name="studytime">
-                                        <option value="1">< 2 hours</option>
+                                        <option value="1">&lt; 2 hours</option>
                                         <option value="2" selected>2 to 5 hours</option>
                                         <option value="3">5 to 10 hours</option>
-                                        <option value="4">> 10 hours</option>
+                                        <option value="4">&gt; 10 hours</option>
                                     </select>
                                 </div>
                                 <div class="input-group">
@@ -71,23 +226,13 @@
                                     <label for="Walc">Weekend Alcohol (1-5)</label>
                                     <input type="range" id="Walc" name="Walc" min="1" max="5" value="1">
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>Background</h3>
-                            <div class="input-grid">
                                 <div class="input-group">
-                                    <label for="Medu">Mother's Education (0-4)</label>
-                                    <input type="number" id="Medu" name="Medu" value="4" min="0" max="4">
+                                    <label for="Dalc">Workday Alcohol (1-5)</label>
+                                    <input type="range" id="Dalc" name="Dalc" min="1" max="5" value="1">
                                 </div>
                                 <div class="input-group">
-                                    <label for="guardian">Guardian</label>
-                                    <select id="guardian" name="guardian">
-                                        <option value="mother" selected>Mother</option>
-                                        <option value="father">Father</option>
-                                        <option value="other">Other</option>
-                                    </select>
+                                    <label for="health">Current Health (1-5)</label>
+                                    <input type="range" id="health" name="health" min="1" max="5" value="3">
                                 </div>
                                 <div class="input-group">
                                     <label for="internet">Internet Access</label>
@@ -99,16 +244,15 @@
                                 <div class="input-group">
                                     <label for="romantic">In Relationship</label>
                                     <select id="romantic" name="romantic">
-                                        <option value="no" selected>No</option>
                                         <option value="yes">Yes</option>
+                                        <option value="no" selected>No</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Other fields will be handled with default values to keep the UI clean -->
+                    
                     <button type="submit" id="predict-btn">Generate Prediction & Insights</button>
-                    <p class="helper-text">* Remaining attributes are set to baseline averages for this demonstration.</p>
                 </form>
             </section>
 
